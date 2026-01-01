@@ -1,19 +1,14 @@
-class Solution(object):
-    def evalRPN(self, t):
-        r, signs = [], ["+", "-", "*", "/"]
-        for i in t:
-            if i not in signs:
-                r.append(int(i))
-            else:
+class Solution:
+    def evalRPN(self, t: List[str]) -> int:
+        r = []
+        for i in range(len(t)):
+            if t[i] in '+-*/': 
                 a, b = r[-2], r[-1]
                 r.pop()
                 r.pop()
-                if i == "+":
-                    r.append(a + b)
-                elif i == "-":
-                    r.append(a - b)
-                elif i == "*":
-                    r.append(a * b)
-                else:
-                    r.append(int(float(a) / b))
+                if t[i]=='+': r.append(a+b)
+                elif t[i]=='-': r.append(a-b)
+                elif t[i]=='*': r.append(a*b)
+                else: r.append(int(a/b))
+            else: r.append(int(t[i]))
         return r[-1]
